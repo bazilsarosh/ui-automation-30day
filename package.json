@@ -1,0 +1,12 @@
+{
+  "name": "ui-automation-30day",
+  "version": "1.0.0",
+  "description": "UI Automation learning project using Playwright",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.45.0"
+  }
+}
