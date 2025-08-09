@@ -15,8 +15,8 @@ class BasePage {
     // Try common consent button labels; ignore if not found
     const labels = ['I agree', 'Accept all', 'Agree to all', 'Accept', 'I accept'];
     for (const label of labels) {
-      const btn = this.page.getByRole('button', { name: label, exact: false });
-      if (await btn.count()) {
+      const btn = this.page.getByRole('button', { name: new RegExp(label, 'i') });
+      if ((await btn.count()) > 0)  {
         await btn.first().click().catch(() => {});
         break;
       }
