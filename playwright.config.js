@@ -1,14 +1,19 @@
 // playwright.config.js
 // @ts-check
-const { defineConfig } = require('@playwright/test');
+import { defineConfig, devices } from '@playwright/test';
 
-module.exports = defineConfig({
-  timeout: 30_000,
+export default defineConfig({
+  expect: {timeout: 30_000},
   retries: 1,
   reporter: [['html', { outputFolder: 'playwright-report', open: 'never' }]],
   use: {
     headless: true,
-    ignoreHTTPSErrors: true,
-    actionTimeout: 15_000,
+    screenshot: 'only-on-failure',
+    video: 'retain-on-failure',
+    trace: 'retain-on-failure',
   },
+  projects: [
+    { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
+    { name: 'firefox',  use: { ...devices['Desktop Firefox'] } },
+  ],
 });

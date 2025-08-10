@@ -1,14 +1,14 @@
-const { test, expect } = require('@playwright/test');
-const PlaywrightHomePage = require('../pages/playwrightHomePage');
-const GettingStartedPage = require('../pages/gettingStartedPage');
+import { test, expect } from '@playwright/test';
+import PlaywrightHomePage from '../pages/playwrightHomePage';
 
-test('Navigate to Getting Started page', async ({ page }) => {
-  const homePage = new PlaywrightHomePage(page);
-  const gettingStartedPage = new GettingStartedPage(page);
+test('smoke: Navigate to Getting Started page', async ({ page }) => {
+  const home = new PlaywrightHomePage(page);
+  await home.goto();
+  await home.clickGettingStarted();
 
-  await homePage.goto();
-  await homePage.clickGettingStarted();
-  const headerText = await gettingStartedPage.getHeaderText();
+  // URL can be /docs/intro or land on Installation, both fine
+  await expect(page).toHaveURL(/playwright\.dev\/docs\//);
 
-  expect(headerText).toMatch(/Playwright enables reliable end-to-end testing for modern web apps./i);
+  const h1 = page.locator('h1');
+  await expect(h1).toHaveText(/(Getting started|Installation)/i);
 });
