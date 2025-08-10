@@ -4,7 +4,10 @@
   "description": "UI Automation learning project using Playwright",
   "main": "index.js",
   "scripts": {
-    "test": "npx playwright test"
+    "test": "npx playwright test",
+    "report:latest": "node scripts/show-latest-report.js",
+    "report:prune": "node scripts/prune-reports.js",
+    "test:clean": "npm run test && npm run report:prune && npm run report:latest"
   },
   "devDependencies": {
     "@playwright/test": "^1.45.0"
